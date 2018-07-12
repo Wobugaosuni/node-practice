@@ -19,6 +19,11 @@ commander
   .action(() => {
     require('../command/zip.js')()
   })
+commander
+  .command('fs')
+  .action(() => {
+    require('../command/fs.js')()
+  })
 
 // 处理参数
 const args = commander.parse(process.argv)
