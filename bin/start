@@ -17,12 +17,17 @@ commander
 commander
   .command('zip')
   .action(() => {
-    require('../command/zip.js')()
+    require('../command/zip.js')()  // 函数自执行
   })
 commander
-  .command('fs')
+  .command('fs1')
   .action(() => {
-    require('../command/fs.js')()
+    require('../command/fs1')()
+  })
+commander
+  .command('fs2')
+  .action(() => {
+    require('../command/fs2')()
   })
 
 // 处理参数
