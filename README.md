@@ -1,10 +1,13 @@
 ## 启动
 
 ```bash
-  ## 1. 建立符号链接
+  ## 1. 安装依赖包
+  npm install
+
+  ## 2. 建立符号链接
   npm link
 
-  ## 2. 执行bin/start下的命令行参数，如
+  ## 3. 执行bin/start下的命令行参数，如
   mynode zip
 ```
 
