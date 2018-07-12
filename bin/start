@@ -1,0 +1,31 @@
+#!/usr/bin/env node --harmony
+'use strict'
+
+const commander = require('commander')
+
+// 定义文件路径
+process.env.NODE_PATH = __dirname + '/../node_modules/'
+
+// console.log('__dirname:', __dirname)  // /Users/qiuxia/code/node/node-practice/bin
+// console.log('process.env.NODE_PATH:', process.env.NODE_PATH)  // /Users/qiuxia/code/node/node-practice/bin/../node_modules/
+
+// 定义当前版本
+commander
+  .version(require('../package.json').version)
+
+// 定义执行文件
+commander
+  .command('zip')
+  .action(() => {
+    require('../command/zip.js')()
+  })
+
+// 处理参数
+const args = commander.parse(process.argv)
+
+// console.log('process.argv:', process.argv)  // [ '/Users/qiuxia/.nvm/versions/node/v8.11.2/bin/node', '/Users/qiuxia/.nvm/versions/node/v8.11.2/bin/mynode', 'zip' ]
+
+// 提供帮助信息
+if (!commander.args.length) {
+  commander.help()
+}
