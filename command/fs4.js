@@ -25,5 +25,4 @@ module.exports = () => {
      */
     fs.mkdirSync('./extra/dir-sync')
   }
-
 }
