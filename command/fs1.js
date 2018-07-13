@@ -3,10 +3,12 @@ const chalk = require('chalk')
 
 module.exports = () => {
   var fs = require('fs')
+  var path = require('path')
+
   var data
 
   // 执行的函数
-  a()
+  bb()
 
   // ----------------------------- 文件读取 ----------------------------
   /**
@@ -55,6 +57,51 @@ module.exports = () => {
       .on('close', () => {
         console.log('已经关闭了')
       })
+  }
+
+
+  // ---------------------------- 目录读取 ----------------------------
+  function aa() {
+    /**
+     * 异步读取目录
+     * 只会读取一层
+     */
+    fs.readdir('./', (error, data) => {
+      if (error) {
+        console.log('遍历目录失败', error);
+      } else {
+        console.log('遍历的目录:', data)
+      }
+    })
+  }
+
+  function bb() {
+    /**
+     * 同步读取目录，`fs.readdirSync`只会读取一层
+     * 需求：递归读取目录
+     */
+
+    var getFilesInDir = function (dir) {
+      var result = [ path.resolve(dir) ]  // [ '/Users/qiuxia/code/node/node-practice/extra' ]
+      var files = fs.readdirSync(dir)  // 一级目录
+
+      files.forEach(item => {
+        var file = path.resolve(dir, item)
+        var isDirectory = fs.statSync(file).isDirectory()
+
+        if (isDirectory) {
+          // 遍历文件夹
+          result = result.concat(getFilesInDir(file))
+        } else {
+          result.push(file)
+        }
+      })
+
+      return result
+    }
+
+    var filesList = getFilesInDir('./extra')
+    console.log('filesList:', filesList)
   }
 
 
