@@ -80,7 +80,6 @@ module.exports = () => {
      * 同步读取目录，`fs.readdirSync`只会读取一层
      * 需求：递归读取目录
      */
-
     var getFilesInDir = function (dir) {
       var result = [ path.resolve(dir) ]  // [ '/Users/qiuxia/code/node/node-practice/extra' ]
       var files = fs.readdirSync(dir)  // 一级目录

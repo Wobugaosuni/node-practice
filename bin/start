@@ -34,6 +34,11 @@ commander
   .action(() => {
     require('../command/fs3')()
   })
+commander
+  .command('fs4')
+  .action(() => {
+    require('../command/fs4')()
+  })
 
 // 处理参数
 const args = commander.parse(process.argv)
