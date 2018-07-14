@@ -23,11 +23,12 @@ module.exports = () => {
   var fs = require('fs')
 
   // const file = './command/fs1.js'  // 终端打印出来的权限如下： `-rw-r--r--   1 qiuxia  staff  2578 Jul 12 20:02 fs1.js`
-  const file = 'noexits.js'
+  // const file = 'noexits.js'
 
-  b()
+  c()
 
   // 单个判断
+  // 默认是 `fs.constants.F_OK`
   function a() {
     // 文件是否存在
     fs.access(file, fs.constants.F_OK, (error) => {
@@ -64,4 +65,29 @@ module.exports = () => {
     })
   }
 
+  /**
+   * 修改文件、目录权限
+   * fs.chmod)、fs.fchmod()区别：传的是文件路径，还是文件句柄
+   * fs.chmod()、fs.lchmod()区别：如果文件是软连接，那么fs.chmod()修改的是软连接指向的目标文件；fs.lchmod()修改的是软连接
+   * File modes: http://nodejs.cn/api/fs.html#fs_file_modes
+   */
+  function c() {
+    // 例如：drwxr-xr-x   3 qiuxia  staff    102 Jul 13 11:38 dir
+    /**
+     * 异步修改
+     */
+    fs.chmod('./extra/dir', '755', error => {
+      if (error) {
+        console.log('修改权限失败', error)
+      } else {
+        console.log('修改权限成功')
+      }
+    })
+
+    // 例如：-rw-r--r--   1 qiuxia  staff     29 Jul 13 17:00 3.txt
+    /**
+     * 同步修改
+     */
+    fs.chmodSync('./extra/3.txt', '644')
+  }
 }
