@@ -8,7 +8,7 @@ module.exports = () => {
   var data
 
   // 执行的函数
-  d()
+  e()
 
   // --------------------------- 文件写入 -----------------------------
   // 如果写入文件不存在，则创建。否则，覆盖文件内容
@@ -78,6 +78,29 @@ module.exports = () => {
       fs.appendFileSync('./extra/3.txt', '\ni agree')
     } catch (error) {
       console.log('文件内容追加失败:', error);
+    }
+  }
+
+
+  // ---------------------------- 文件内容截取 --------------------------
+  // 如果len小于文件内容长度，剩余文件内容部分会丢失；
+  // 如果len大于文件内容长度，那么超出的部分，会用\0进行填充
+  function e() {
+    /**
+     * 异步文件内容截取
+     */
+    fs.truncate('./extra/1.txt', 35, error => {
+      if(error) throw error
+      console.log('文件内容截取成功')
+    })
+
+    /**
+     * 同步文件内容截取
+     */
+    try {
+      fs.truncateSync('./extra/3.txt', 35)
+    } catch (error) {
+      console.log('文件内容截取失败:', error);
     }
   }
 }
