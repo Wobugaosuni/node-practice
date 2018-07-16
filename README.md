@@ -33,7 +33,11 @@
 - [fs6-文件写入，文件内容追加，文件内容截取]()
 - [fs2-文件是否存在，文件权限，文件访问常量，修改文件/目录权限]()
 - [fs3-文件删除，文件重命名]()
-- [fs7-创建文件链接]()
-- [fs4-目录创建]()
+- [fs7-创建文件软链接、硬链接]()
+- [fs4-创建目录，创建临时目录]()
 - [f35-目录/文件监听]()
 
+## 文档参考
+
+- [Node.js](http://nodejs.cn/api/)
+- [nodejs-learning-guide](https://github.com/chyingp/nodejs-learning-guide)
