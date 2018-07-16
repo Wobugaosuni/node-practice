@@ -68,7 +68,7 @@ module.exports = () => {
   /**
    * 修改文件、目录权限
    * fs.chmod)、fs.fchmod()区别：传的是文件路径，还是文件句柄
-   * fs.chmod()、fs.lchmod()区别：如果文件是软连接，那么fs.chmod()修改的是软连接指向的目标文件；fs.lchmod()修改的是软连接
+   * fs.chmod()、fs.lchmod()区别：如果文件是软链接，那么fs.chmod()修改的是软链接指向的目标文件；fs.lchmod()修改的是软链接
    * File modes: http://nodejs.cn/api/fs.html#fs_file_modes
    */
   function c() {

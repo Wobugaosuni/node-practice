@@ -32,6 +32,9 @@ module.exports = () => {
    * 生成六位随机字符附加到一个要求的 prefix 后面
    */
   function b() {
+    /**
+     * 异步
+     */
     fs.mkdtemp('./extra/temp', (error, folder) => {
       // 会生成如下目录：
       // drwx------   2 qiuxia  staff     68 Jul 16 20:28 temprcRA0O
@@ -41,5 +44,9 @@ module.exports = () => {
         console.log('创建临时目录成功:', folder);
       }
     })
+
+    /**
+     * 同步
+     */
   }
 }

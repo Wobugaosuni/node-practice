@@ -54,6 +54,11 @@ commander
   .action(() => {
     require('../command/fs7')()
   })
+commander
+  .command('fs8')
+  .action(() => {
+    require('../command/fs8')()
+  })
 
 // 处理参数
 const args = commander.parse(process.argv)
