@@ -20,7 +20,7 @@ module.exports = () => {
         console.log('查找失败:', error);
       } else {
         console.log('查找成功:', link);
-      }
+   }
     })
 
     /**

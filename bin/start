@@ -19,6 +19,7 @@ commander
   .action(() => {
     require('../command/zip.js')()  // 函数自执行
   })
+
 commander
   .command('fs1')
   .action(() => {
@@ -58,6 +59,11 @@ commander
   .command('fs8')
   .action(() => {
     require('../command/fs8')()
+  })
+commander
+  .command('dns')
+  .action(() => {
+    require('../command/dns')()
   })
 
 // 处理参数
