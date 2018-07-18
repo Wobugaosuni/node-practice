@@ -65,6 +65,11 @@ commander
   .action(() => {
     require('../command/dns')()
   })
+commander
+  .command('http')
+  .action(() => {
+    require('../command/http')()
+  })
 
 // 处理参数
 const args = commander.parse(process.argv)
