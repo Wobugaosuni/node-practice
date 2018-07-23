@@ -75,6 +75,11 @@ commander
   .action(() => {
     require('../command/url')()
   })
+commander
+  .command('querystring')
+  .action(() => {
+    require('../command/querystring')()
+  })
 
 // 处理参数
 const args = commander.parse(process.argv)
