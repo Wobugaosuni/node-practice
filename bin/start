@@ -80,6 +80,11 @@ commander
   .action(() => {
     require('../command/querystring')()
   })
+commander
+  .command('https')
+  .action(() => {
+    require('../command/https-get')()
+  })
 
 // 处理参数
 const args = commander.parse(process.argv)

@@ -40,6 +40,7 @@
 - [域名解析-dns](./command/dns.js)
 - [url网址解析](./command/url.js)
 - [querystring参数解析](./command/querystring.js)
+- [http，启动一个服务](./command/http.js)
 
 ## 文档参考
 
