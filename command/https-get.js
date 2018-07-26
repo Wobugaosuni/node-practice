@@ -67,7 +67,7 @@ function filterMessage(html) {
  */
 function writeFile(content) {
   try {
-    fs.writeFileSync('./extra/spider.js', content, 'utf8')
+    fs.writeFileSync('./extra/spider.json', content, 'utf8')
     console.log('文件写入成功');
   } catch (error) {
     console.log('文件写入出错:', error);
