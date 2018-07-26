@@ -1,8 +1,12 @@
 'use strict'
 const chalk = require('chalk')
 const https = require('https')
-var cheerio = require('cheerio')
+const cheerio = require('cheerio')
+const fs = require('fs')
 
+/**
+ * 数据过滤示例
+ */
 function filterMessageExample(html) {
   const text = '<ul id="fruits"><li class="apple"><a>Apple</a></li><li class="orange"><a>Orange</a></li><li class="pear"><a>Pear</a></li></ul>'
   var $ = cheerio.load(text)
@@ -58,6 +62,18 @@ function filterMessage(html) {
   return result
 }
 
+/**
+ * 同步写入文件
+ */
+function writeFile(content) {
+  try {
+    fs.writeFileSync('./extra/spider.js', content, 'utf8')
+    console.log('文件写入成功');
+  } catch (error) {
+    console.log('文件写入出错:', error);
+  }
+}
+
 module.exports = () => {
   /**
    * HTTP小爬虫
@@ -78,7 +94,10 @@ module.exports = () => {
       // console.log('html:', html)
       // 信息过滤
       const result = filterMessage(html)
-      console.log('result:', result);
+      // console.log('result:', result);
+
+      // 文件写入
+      writeFile(JSON.stringify(result))
     })
   }).on('error', error => {
     console.log('获取资源出错:', error)
