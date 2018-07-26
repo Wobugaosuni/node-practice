@@ -85,6 +85,11 @@ commander
   .action(() => {
     require('../command/https-get')()
   })
+commander
+  .command('events')
+  .action(() => {
+    require('../command/events')()
+  })
 
 // 处理参数
 const args = commander.parse(process.argv)
