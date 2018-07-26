@@ -1,3 +1,8 @@
+/**
+ * cheerio：爬虫辅助小工具，实现了核心jQuery的子集
+ * https://github.com/cheeriojs/cheerio/wiki/Chinese-version
+ */
+
 'use strict'
 const chalk = require('chalk')
 const https = require('https')
