@@ -81,9 +81,14 @@ commander
     require('../command/querystring')()
   })
 commander
-  .command('https')
+  .command('https-get')
   .action(() => {
     require('../command/https-get')()
+  })
+commander
+  .command('https-request')
+  .action(() => {
+    require('../command/https-request')()
   })
 commander
   .command('events')
