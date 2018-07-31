@@ -83,7 +83,7 @@ commander
 commander
   .command('https-get')
   .action(() => {
-    require('../command/https-get')()
+    require('../command/https-get2')()
   })
 commander
   .command('https-request')
@@ -94,6 +94,11 @@ commander
   .command('events')
   .action(() => {
     require('../command/events')()
+  })
+commander
+  .command('https')
+  .action(() => {
+    require('../command/https')()
   })
 
 // 处理参数
