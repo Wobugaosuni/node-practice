@@ -15,43 +15,32 @@ const courserMembersUrl = 'https://www.imooc.com/course/AjaxCourseMembers?ids='
 // const resultList = [{
 //   courseName: '',
 //   learningNumbers: '',
-//   chapters: [],
+//   chapters: [{
+//     title: '',
+//     chapter: []
+//   }],
 // }, {
 //   。。。
 // }]
 
-function filterMessage(html) {
-  const text = html
-  var $ = cheerio.load(text)
+function filterMessage(html, numbers) {
+  var $ = cheerio.load(html)
 
   var courseName = $('.course-infos .hd h2').text()
-  var learningNumbers = $('.course-infos .statics .meta-value.js-learn-num').text()
-
   var result = {}
 
   result.courseName = courseName
-  result.learningNumbers = learningNumbers
+  result.learningNumbers = numbers
+  result.chapters = []
 
-  // list.each((index, item) => {
-  //   let obj = {}
+  var chapters = $('.course-chapters .chapter')
 
-  //   // 文章标题
-  //   obj.article = $('.title-row', item).find('a.title').text()
-
-  //   // 文章url
-  //   let articlePath = $('.title-row', item).find('a.title').attr('href')
-  //   obj.articleUrl = `https://juejin.im${articlePath}`
-
-  //   // 作者
-  //   obj.author = $('.meta-row', item).find('.user-popover-box a').text()
-
-  //   // 作者url
-  //   // let authorPath = $('.meta-row', item).find('.user-popover-box a').attr('href')
-  //   // obj.authorUrl = `https://juejin.im${authorPath}`
-
-  //   result.push(obj)
-  // })
-
+  chapters.each((index, element) => {
+    let chapter = {}
+    let title = $('h3', element).text()
+    chapter.title = title
+    result.chapters.push(chapter)
+  });
   return result
 }
 
@@ -68,6 +57,8 @@ function writeFile(content) {
 }
 
 function promiseHtml() {
+  console.log('正在爬取html...');
+
   let html = ''
   return new Promise(function (resolve, reject) {
     https.get(baseUrl + '637', res => {
@@ -96,6 +87,8 @@ function promiseHtml() {
 }
 
 function promiseNumbers() {
+  console.log('正在爬取人数...');
+
   let numbers = ''
   return new Promise(function(resolve, reject) {
     https.get(courserMembersUrl + '637', res => {
@@ -119,8 +112,11 @@ module.exports = () => {
    * HTTP小爬虫
    */
   Promise.all([promiseHtml(), promiseNumbers()])
-    .then(post => {
-      console.log('get promise.all list success:', post[1])
+    .then(list => {
+      // console.log('get promise.all list success:', list[1])
+      const result = filterMessage(list[0], list[1])
+
+      console.log('result:', result)
     })
     .catch(error => {
       console.log('promise all fail:', error)
