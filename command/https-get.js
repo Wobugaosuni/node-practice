@@ -13,7 +13,7 @@ const fs = require('fs')
  * 数据过滤示例
  */
 function filterMessageExample(html) {
-  const text = '<ul id="fruits"><li class="apple"><a>Apple</a></li><li class="orange"><a>Orange</a></li><li class="pear"><a>Pear</a></li></ul>'
+  const text = '<ul id="fruits"><li class="apple"><a>Apple<span>pineapple</span></a></li><li class="orange"><a>Orange</a></li><li class="pear"><a>Pear</a></li></ul>'
   var $ = cheerio.load(text)
 
   var list = $('#fruits li')
@@ -21,6 +21,9 @@ function filterMessageExample(html) {
   var result = []
 
   list.each((index, item) => {
+    // 移除 a 标签下面的子节点
+    $('a', item).find('span').remove()
+
     result.push($('a', item).text())
   })
 
@@ -100,6 +103,8 @@ module.exports = () => {
       // 信息过滤
       const result = filterMessage(html)
       // console.log('result:', result);
+
+      filterMessageExample()
 
       // 文件写入
       writeFile(JSON.stringify(result))

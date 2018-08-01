@@ -46,7 +46,11 @@ function filterMessage(html, numbers) {
 
     let chapters = $('ul.video >li', element)
     chapters.each((index, item) => {
-      course.videos.push($('a', item).text().trim())
+      // 移除 a 下面的 button 节点
+      $('a', item).find('button').remove()
+
+      let text = $('a', item).text().trim()
+      course.videos.push(text)
     })
 
     // console.log('course.chapters:', course.chapters)
