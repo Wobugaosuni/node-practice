@@ -17,12 +17,15 @@ const courserMembersUrl = 'https://www.imooc.com/course/AjaxCourseMembers?ids='
 //   learningNumbers: '',
 //   chapters: [{
 //     title: '',
-//     chapter: []
+//     videos: []
 //   }],
 // }, {
 //   。。。
 // }]
 
+/**
+ * 处理数据
+ */
 function filterMessage(html, numbers) {
   var $ = cheerio.load(html)
 
@@ -36,23 +39,47 @@ function filterMessage(html, numbers) {
   var chapters = $('.course-chapters .chapter')
 
   chapters.each((index, element) => {
-    let chapter = {}
-    let title = $('h3', element).text()
-    chapter.title = title
-    result.chapters.push(chapter)
+    let course = {}
+    course.videos = []
+
+    course.title = $('h3', element).text().trim()
+
+    let chapters = $('ul.video >li', element)
+    chapters.each((index, item) => {
+      course.videos.push($('a', item).text().trim())
+    })
+
+    // console.log('course.chapters:', course.chapters)
+
+    result.chapters.push(course)
   });
+
+  // console.log('result:', result)
   return result
 }
 
 /**
  * 同步写入文件
  */
-function writeFile(content) {
+function writeFile(content, filePath) {
   try {
-    fs.writeFileSync('./extra/spider.json', content, 'utf8')
+    fs.writeFileSync(filePath, content, 'utf8')
     console.log('文件写入成功');
   } catch (error) {
     console.log('文件写入出错:', error);
+  }
+}
+
+/**
+ * 同步读取文件
+ */
+function readFile(filePath) {
+  try {
+    const data = fs.readFileSync(filePath, 'utf8')
+    console.log('文件读取成功')
+    return data
+  } catch(error) {
+    console.log('读取文件出错：', error)
   }
 }
 
@@ -114,9 +141,17 @@ module.exports = () => {
   Promise.all([promiseHtml(), promiseNumbers()])
     .then(list => {
       // console.log('get promise.all list success:', list[1])
-      const result = filterMessage(list[0], list[1])
 
-      console.log('result:', result)
+      // 把爬取到的文章保存起来
+      writeFile(list[0], './extra/courses/1.html')
+
+      // 读取文件
+      const data = readFile('./extra/courses/1.html')
+      // 数据处理
+      const result = filterMessage(data, list[1])
+      writeFile(JSON.stringify(result), './extra/spider.json')
+
+      // console.log('result:', list[0])
     })
     .catch(error => {
       console.log('promise all fail:', error)
