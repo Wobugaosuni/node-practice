@@ -49,7 +49,8 @@ function filterMessage(html, numbers) {
       // 移除 a 下面的 button 节点
       $('a', item).find('button').remove()
 
-      let text = $('a', item).text().trim()
+      // 前后删掉空格，删掉多余的空白符
+      let text = $('a', item).text().trim().replace(/(\s){3,}/gm, ' ')
       course.videos.push(text)
     })
 
