@@ -9,7 +9,8 @@ const cheerio = require('cheerio')
 const fs = require('fs')
 
 const baseUrl = 'https://www.imooc.com/learn/'
-const courserMembersUrl = 'https://www.imooc.com/course/AjaxCourseMembers?ids='
+const coursesMembersUrl = 'https://www.imooc.com/course/AjaxCourseMembers?ids='
+const coursesIdList = ['348', '637', '728', '197', '75']
 
 // 数据结构格式
 // const resultList = [{
@@ -69,7 +70,7 @@ function filterMessage(html, numbers) {
 function writeFile(content, filePath) {
   try {
     fs.writeFileSync(filePath, content, 'utf8')
-    console.log('文件写入成功');
+    console.log(filePath + '写入成功');
   } catch (error) {
     console.log('文件写入出错:', error);
   }
@@ -81,19 +82,19 @@ function writeFile(content, filePath) {
 function readFile(filePath) {
   try {
     const data = fs.readFileSync(filePath, 'utf8')
-    console.log('文件读取成功')
+    console.log(filePath + '读取成功')
     return data
   } catch(error) {
     console.log('读取文件出错：', error)
   }
 }
 
-function promiseHtml() {
-  console.log('正在爬取html...');
+function promiseHtml(courseId) {
+  console.log(`正在爬取id为${courseId}的html...`);
 
   let html = ''
   return new Promise(function (resolve, reject) {
-    https.get(baseUrl + '637', res => {
+    https.get(baseUrl + courseId, res => {
       // console.log('状态码：', res.statusCode);
       // console.log('请求头：', res.headers);
 
@@ -118,16 +119,16 @@ function promiseHtml() {
   })
 }
 
-function promiseNumbers() {
-  console.log('正在爬取人数...');
+function promiseNumbers(courseId) {
+  console.log(`正在爬取id为${courseId}的人数...`);
 
   let numbers = ''
   return new Promise(function(resolve, reject) {
-    https.get(courserMembersUrl + '637', res => {
+    https.get(coursesMembersUrl + courseId, res => {
       res.on('data', buffer => {
         numbers = JSON.parse(buffer).data[0].numbers
-        // console.log('get courserMembersUrl data success:', numbers);
-        // console.log('get courserMembersUrl buffer success:', buffer);
+        // console.log('get coursesMembersUrl data success:', numbers);
+        // console.log('get coursesMembersUrl buffer success:', buffer);
       })
 
       res.on('end', () => {
@@ -139,26 +140,39 @@ function promiseNumbers() {
   })
 }
 
-module.exports = () => {
-  /**
-   * HTTP小爬虫
-   */
-  Promise.all([promiseHtml(), promiseNumbers()])
+function getTotalData(courseId) {
+  return Promise.all([promiseHtml(courseId), promiseNumbers(courseId)])
     .then(list => {
       // console.log('get promise.all list success:', list[1])
 
       // 把爬取到的文章保存起来
-      writeFile(list[0], './extra/courses/1.html')
+      writeFile(list[0], `./extra/courses/${courseId}.html`)
 
       // 读取文件
-      const data = readFile('./extra/courses/1.html')
+      const data = readFile(`./extra/courses/${courseId}.html`)
       // 数据处理
       const result = filterMessage(data, list[1])
-      writeFile(JSON.stringify(result), './extra/spider.json')
+      writeFile(JSON.stringify(result), `./extra/courses/${courseId}.json`)
 
-      // console.log('result:', list[0])
     })
     .catch(error => {
       console.log('promise all fail:', error)
     })
+}
+
+module.exports = () => {
+  /**
+   * HTTP小爬虫
+   */
+  const promiseCourses = coursesIdList.map(courseId => {
+    getTotalData(courseId)
+  })
+
+  // Promise.all(promiseCourses)
+  //   .then(() => {
+  //     console.log('allList:', allList);
+  //   })
+  //   .catch(error => {
+  //     console.log('全部文章爬取失败');
+  //   })
 }
