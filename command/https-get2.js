@@ -3,6 +3,12 @@
  * https://github.com/cheeriojs/cheerio/wiki/Chinese-version
  */
 
+/**
+ * 使用 https-get 的爬虫
+ * 只是一个http请求，只能爬取单纯的html代码（打开一个网站 -> 查看源码 里的就是这个请求里能爬到的代码
+ * 其他的JS引擎渲染的内容，需要去分析一个个的后台请求，手动拼装想要得到的结果
+ */
+
 'use strict'
 const https = require('https')
 const cheerio = require('cheerio')
