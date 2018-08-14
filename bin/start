@@ -100,6 +100,11 @@ commander
   .action(() => {
     require('../command/https')()
   })
+commander
+  .command('buffer')
+  .action(() => {
+    require('../command/buffer')()
+  })
 
 // 处理参数
 const args = commander.parse(process.argv)
