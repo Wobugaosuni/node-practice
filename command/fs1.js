@@ -1,10 +1,9 @@
 'use strict'
 const chalk = require('chalk')
+const fs = require('fs')
+const path = require('path')
 
 module.exports = () => {
-  var fs = require('fs')
-  var path = require('path')
-
   var data
 
   // 执行的函数
@@ -13,11 +12,19 @@ module.exports = () => {
   // ----------------------------- 文件读取 ----------------------------
   /**
    * 同步读取
+   * fs.readFile(path[, options], callback)
+   * 如果 options 是一个字符串，则它指定了字符编码
+   * 如果未指定字符编码，则返回原始的 buffer
    */
   function a() {
     try {
-      data = fs.readFileSync('./extra/compress.txt', 'utf8')
-      console.log('文件内容:', data)
+      const buf = fs.readFileSync('./extra/compress.txt')
+      console.log('buf:', buf)
+      // <Buffer e6 98 a5 e5 a4 a9 e6 9d a5 e4 ba 86 0a>
+
+      const utf = fs.readFileSync('./extra/compress.txt', 'utf8')
+      console.log('utf:', utf)
+      // 春天来了
     } catch(error) {
       console.log('读取文件出错：', error)
     }

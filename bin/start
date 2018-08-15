@@ -101,9 +101,14 @@ commander
     require('../command/https')()
   })
 commander
-  .command('buffer')
+  .command('buffer1')
   .action(() => {
-    require('../command/buffer')()
+    require('../command/buffer1')()
+  })
+commander
+  .command('buffer2')
+  .action(() => {
+    require('../command/buffer2')()
   })
 
 // 处理参数

@@ -14,6 +14,10 @@ module.exports = () => {
   // 如果写入文件不存在，则创建。否则，覆盖文件内容
   /**
    * 同步
+   * fs.writeFile(file, data[, options], callback)
+   * data <string> | <Buffer> | <Uint8Array>
+   * encoding <string> | <null> 默认为 'utf8'
+   * 如果 data 是一个 buffer，则 encoding 选项无效
    */
   function a() {
     try {

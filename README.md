@@ -44,7 +44,8 @@
 - [https.get，一个小爬虫，使用`cheerio`辅助小工具](./command/https-get.js)
 - [https.get2，爬虫优化](./command/https-get2.js)
 - [https，启动一个服务](./command/https.js)
-- [Buffer，创建Buffer实例，及实例方法](./command/buffer.js)
+- [Buffer1，创建Buffer实例，实例方法（复制、写入）](./command/buffer1.js)
+- [Buffer2，Buffer静态方法（是否是Buffer、比较），实例方法（解码）](./command/buffer2.js)
 
 ## 文档参考
 
