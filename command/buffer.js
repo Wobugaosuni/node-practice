@@ -7,7 +7,7 @@
  */
 
  module.exports = () => {
-   a()
+   d()
 
   /*
    * 创建一个实例
@@ -57,5 +57,58 @@
     allocBlank.write('hello')
     console.log('blank write: ', allocBlank.toString());
     // hello
+  }
+
+  /**
+   * Buffer 实例方法
+   * write 写入的方法不会改变 Buffer 实例的长度
+   *
+   * buf.write(string[, offset[, length]][, encoding])
+   * string <string> 要写入 buf 的字符串。
+   * offset <integer> 开始写入 string 前要跳过的字节数。默认: 0。
+   * length <integer> 要写入的字节数。默认: buf.length - offset。
+   * encoding <string> string 的字符编码。默认: 'utf8'。
+   */
+  function c() {
+    const buf = Buffer.from('hello world')
+
+    console.log('buf.length: ', buf.length);
+    console.log('buf: ', buf.toString());
+    // 11
+    // hello world
+
+    buf.write('bad')
+    console.log('buf.length: ', buf.length);
+    console.log('buf: ', buf.toString());
+    // 11
+    // badlo world
+
+    buf.write(' guy', 2, 13)
+    console.log('buf.length: ', buf.length);
+    console.log('buf: ', buf.toString());
+    // 11
+    // ba guyworld
+  }
+
+  /**
+   * Buffer 实例方法
+   *
+   * buf.copy(target[, targetStart[, sourceStart[, sourceEnd]]])
+   * target <Buffer> | <Uint8Array> 要拷贝进的 Buffer 或 Uint8Array。
+   * targetStart <integer> target 中开始拷贝进的偏移量。 默认: 0
+   * sourceStart <integer> buf 中开始拷贝的偏移量。 默认: 0
+   * sourceEnd <integer> buf 中结束拷贝的偏移量（不包含）。 默认: buf.length
+   */
+  function d() {
+    const buf1 = Buffer.from('hello world')
+    const buf2 = Buffer.alloc(4)
+
+    buf1.copy(buf2)
+    console.log('buf2: ', buf2.toString());
+    // hell
+
+    buf1.copy(buf2, 0, 6, 11)
+    console.log('buf2: ', buf2.toString());
+    // worl
   }
  }
