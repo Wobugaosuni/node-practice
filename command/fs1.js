@@ -48,6 +48,14 @@ module.exports = () => {
    * 适合读取大文件
    * encoding <string> 默认为 null
    * 文档：http://nodejs.cn/api/stream.html#stream_class_stream_readable
+   *
+   * 'data'事件
+   * 'readable'事件
+   * 'error'事件
+   * 'end'事件
+   * 'close'事件
+   * readable.pause(): 会使 flowing 模式的流停止触发 'data' 事件， 进而切出 flowing 模式。任何可用的数据都将保存在内部缓存中
+   * readable.resume(): 重新触发 'data' 事件, 将暂停模式切换到流动模式
    */
   function c() {
     var readStream = fs.createReadStream('./extra/small.mov')  // 返回一个可读流： fs.ReadStream 类

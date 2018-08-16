@@ -45,6 +45,16 @@ module.exports = () => {
    * 通过文件流
    * 文档参考；http://nodejs.cn/api/stream.html#stream_class_stream_writable
    * 返回一个可写流： fs.WriteStream 类
+   *
+   * writable.write(chunk[, encoding][, callback])
+   * 返回: <boolean> 如果流需要等待 'drain' 事件触发才能继续写入更多数据，则返回 false，否则返回 true
+   * 当流还未被排空， 则调用 write() 会缓冲 chunk，并且返回 false。 一旦所有当前被缓冲的数据块都被排空了（被操作系统接受来进行输出），则触发 'drain' 事件。 建议一旦 write() 返回 false，则不再写入任何数据块，直到 'drain' 事件被触发
+   * 详看 ./stream.js
+   *
+   * 'close' 事件
+   * 'drain' 事件: 如果调用 stream.write(chunk) 方法返回 false，则在适合恢复写入数据到流时触发 'drain' 事件
+   * 'error' 事件
+   * 'finish' 事件
    */
   function c() {
     var writeStream = fs.createWriteStream('./extra/3.txt', 'utf8')  // 返回一个可写流： fs.WriteStream 类
@@ -59,10 +69,10 @@ module.exports = () => {
 
     console.log('文件写入成功')
 
-    // writeStream
-    //   .on('end', () => {
-    //     console.log('没有数据了')
-    //   })
+    writeStream
+      .on('end', () => {
+        console.log('没有数据了')
+      })
   }
 
 
