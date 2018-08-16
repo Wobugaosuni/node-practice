@@ -44,6 +44,7 @@ module.exports = () => {
   /**
    * 通过文件流
    * 文档参考；http://nodejs.cn/api/stream.html#stream_class_stream_writable
+   * 返回一个可写流： fs.WriteStream 类
    */
   function c() {
     var writeStream = fs.createWriteStream('./extra/3.txt', 'utf8')  // 返回一个可写流： fs.WriteStream 类

@@ -7,7 +7,7 @@ module.exports = () => {
   var data
 
   // 执行的函数
-  a()
+  c()
 
   // ----------------------------- 文件读取 ----------------------------
   /**
@@ -46,14 +46,35 @@ module.exports = () => {
   /**
    * 通过文件流读取
    * 适合读取大文件
+   * encoding <string> 默认为 null
    * 文档：http://nodejs.cn/api/stream.html#stream_class_stream_readable
    */
   function c() {
-    var readStream = fs.createReadStream('./extra/niuniu.md', {encoding: 'utf8'})  // 返回一个可读流： fs.ReadStream 类
+    var readStream = fs.createReadStream('./extra/small.mov')  // 返回一个可读流： fs.ReadStream 类
+    var n = 0
 
     readStream
       .on('data', chunk => {
-        console.log('文件内容:', chunk)
+        n++
+
+        console.log('on data调用的次数：', n);
+        // console.log('文件内容:', chunk)
+
+        console.log('isBuffer:', Buffer.isBuffer(chunk));
+        // true
+
+        // 暂停读入
+        readStream.pause()
+        console.log('readStream pause');
+
+        setTimeout(() => {
+          // 重新触发 'data' 事件, 将暂停模式切换到流动模式
+          readStream.resume()
+          console.log('readStrean resume');
+        }, 30)
+      })
+      .on('readable', () => {
+        console.log('data readable');
       })
       .on('error', error => {
         console.log('读取文件出错：', error)
