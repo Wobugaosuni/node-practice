@@ -1,3 +1,14 @@
+/**
+ * 文档参考
+ * 用于实现流的API
+ *
+ * readable.push(chunk[, encoding])
+ * chunk: 压入读队列的数据块
+ *
+ * writable._write(chunk, encoding, callback)
+ */
+
+
 
 // 1. 引进类
 const Readable = require('stream').Readable
