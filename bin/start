@@ -120,6 +120,11 @@ commander
   .action(() => {
     require('../command/stream2')()
   })
+commander
+  .command('stream3')
+  .action(() => {
+    require('../command/stream3')()
+  })
 
 // 处理参数
 const args = commander.parse(process.argv)
