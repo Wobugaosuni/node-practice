@@ -111,9 +111,14 @@ commander
     require('../command/buffer2')()
   })
 commander
-  .command('stream')
+  .command('stream1')
   .action(() => {
-    require('../command/stream')()
+    require('../command/stream1')()
+  })
+commander
+  .command('stream2')
+  .action(() => {
+    require('../command/stream2')()
   })
 
 // 处理参数

@@ -15,14 +15,14 @@ module.exports = () => {
    * encoding 不传的话，默认返回 buffer
    */
   function a() {
-    fs.readFile('./imgs/google-logo.png', 'base64', (error, base64Image) => {
+    fs.readFile('./extra/imgs/google-logo.png', 'base64', (error, base64Image) => {
       if (error) {
         console.log('读取图片出错：', error)
         return
       }
       console.log('图片内容:', `data:image/png;base64,${base64Image}`)
 
-      fs.writeFile('./imgs/goole-base64.png', base64Image, 'base64', error => {
+      fs.writeFile('./extra/imgs/goole-base64.png', base64Image, 'base64', error => {
         if (error) {
           console.log('写入文件出错：', error)
           return
@@ -49,7 +49,7 @@ module.exports = () => {
     * encoding <string> 解码使用的字符编码。默认: 'utf8'
     */
   function b() {
-    fs.readFile('./imgs/google-logo.png', (error, buf1) => {
+    fs.readFile('./extra/imgs/google-logo.png', (error, buf1) => {
       if (error) {
         console.log('读取图片出错：', error)
         return
@@ -71,7 +71,7 @@ module.exports = () => {
       const decodedImage = buf2.toString('base64')
       console.log('decodedImage: ', `data:image/png;base64,${decodedImage}`)
 
-      fs.writeFile('./imgs/goole-base64.png', decodedImage, 'base64', error => {
+      fs.writeFile('./extra/imgs/goole-base64.png', decodedImage, 'base64', error => {
         if (error) {
           console.log('写入文件出错：', error)
           return
