@@ -46,7 +46,8 @@
 - [https，启动一个服务](./command/https.js)
 - [buffer1，创建Buffer实例，实例方法（复制、写入）](./command/buffer1.js)
 - [buffer2，Buffer静态方法（是否是Buffer、比较），实例方法（解码）](./command/buffer2.js)
-- [stream，文件的读取和写入，防爆仓的方法](./command/stream.js)
+- [stream1，文件的读取和写入，防爆仓的方法](./command/stream1.js)
+- [stream2，使用request的模块，pipe的多种用法](./command/stream2.js)
 
 ## 文档参考
 
