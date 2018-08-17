@@ -23,6 +23,8 @@ module.exports = () => {
       serverRes.end('hey node')
     })
 
-    server.listen(port)
+    server.listen(port, hostname, () => {
+      console.log(`Server running at http://${hostname}:${port}/`)
+    })
   }
 }
