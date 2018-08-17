@@ -30,6 +30,7 @@ module.exports = () => {
   function c() {
     /*
      * 异步重命名文件
+     * fs.rename(oldPath, newPath, callback)
      */
     fs.rename('./extra/3.txt', './extra/3.md', error => {
       if (error) {
