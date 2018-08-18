@@ -3,9 +3,11 @@
  * 用于实现流的API
  *
  * readable.push(chunk[, encoding])
+ * http://nodejs.cn/api/stream.html#stream_readable_push_chunk_encoding
  * chunk: 压入读队列的数据块
  *
  * writable._write(chunk, encoding, callback)
+ * http://nodejs.cn/api/stream.html#stream_writable_write_chunk_encoding_callback_1
  */
 
 
