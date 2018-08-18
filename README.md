@@ -49,6 +49,7 @@
 - [stream1，文件的读取和写入，防爆仓的方法](./command/stream1.js)
 - [stream2，使用request的模块，pipe的多种用法](./command/stream2.js)
 - [stream3，实现流的API](./command/stream3.js)
+- [stream4，实现定制的可读流、可写流、转换流，及其内置接口](./command/stream4.js)
 
 ## 文档参考
 
