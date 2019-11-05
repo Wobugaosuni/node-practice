@@ -15,6 +15,7 @@
    * Buffer.from(buffer)
    * Buffer.from(array)
    * encoding: 默认 utf8
+   * buffer.toString()
    */
   function a() {
     const buf1 = Buffer.from('buffer')

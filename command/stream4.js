@@ -19,10 +19,16 @@ const stream = require('stream')
 
 // 定制的可读流继承可读流的原型
 class ReadStream extends stream.Readable {
+  constructor(props) {
+    super(props)
+
+    // console.log('ReadStream props:', props);
+    this.content = props
+  }
+
   _read() {
-    this.push('I ')
-    this.push('Love ')
-    this.push('You\n ')
+    this.push(this.content)
+
     // 可读流的数据读取完毕
     this.push(null)
   }
@@ -45,21 +51,28 @@ class WriteStream extends stream.Writable {
 
 // 转换流
 class TranformStream extends stream.Transform {
+  constructor(props) {
+    super(props)
+
+    this.content = props
+  }
+
   _transform(chunk, encode, cb) {
     this.push(chunk)
     cb()
   }
+
   _flush(cb) {
     // 为读到的数据添加额外定制的内容
-    this.push('Oh Yeah!')
+    this.push(this.content)
   }
 }
 
 module.exports = () => {
   // 生成实例
-  var rs = new ReadStream()
+  var rs = new ReadStream('I Love You')
   var ws = new WriteStream()
-  var ts = new TranformStream()
+  var ts = new TranformStream('Oh Yeah!')
 
   // 把读到的数据pipe给转换流（对内容进行额外的定制和处理）。转换流处理完后，再pipe给可写流（进行打印）
   rs.pipe(ts).pipe(ws)
