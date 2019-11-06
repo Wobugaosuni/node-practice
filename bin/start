@@ -21,6 +21,12 @@ commander
   })
 
 commander
+  .command('connect')
+  .action(() => {
+    require('../command/http-connection/connection')()
+  })
+
+commander
   .command('fs1')
   .action(() => {
     require('../command/fs1')()
