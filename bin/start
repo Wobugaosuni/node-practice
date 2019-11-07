@@ -21,6 +21,12 @@ commander
   })
 
 commander
+  .command('cors')
+  .action(() => {
+    require('../command/CORS/server')()
+  })
+
+commander
   .command('connect')
   .action(() => {
     require('../command/http-connection/connection')()

@@ -1,6 +1,7 @@
 /**
  * tcp 长连接
  * http请求是在tcp的基础上的，一个tcp可以有多个http请求
+ * Connection 有两个值，'keep-alive' 和 'close'，默认 'keep-alive'
  */
 const http = require('http')
 const fs = require('fs')
