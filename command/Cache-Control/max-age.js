@@ -1,5 +1,6 @@
 /**
- * 
+ * 设置缓存时间测试
+ * 在目录下执行：node max-age.js
  */
 const http = require('http')
 const fs = require('fs')
@@ -21,8 +22,8 @@ http.createServer((request, response) => {
   if (request.url === '/test.js') {
     // 请求的资源，缓存测试
     response.writeHead(200, {
-      'Cache-Control': 'max-age=200',
       'Content-Type': 'text/javascript',
+      'Cache-Control': 'max-age=200',
     })
     response.end('console.log("cache-control test")')
   }
