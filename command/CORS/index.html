@@ -8,15 +8,30 @@
 </head>
 <body>
   <p>跨域测试</p>
+  <!--
   <script>
     // 跨域方案1，设置 `Access-Control-Allow-Origin`
     var xhr = new XMLHttpRequest()
     xhr.open('GET', 'http://127.0.0.1:8881')
     xhr.send()
   </script>
-  
+  -->
+
+  <script>
+    // 跨域方案1，自定义请求头字段的情况处理
+    fetch('http://127.0.0.1:8881', {
+      method: 'POST',
+      headers: {
+        'X-Test-Cors': '123',  // 自定义头字段
+      }
+    })
+  </script>
+
+  <!--
   <script src="http://127.0.0.1:8881">
     // 跨域方案2，JSONP
   </script>
+  -->
+
 </body>
 </html>
