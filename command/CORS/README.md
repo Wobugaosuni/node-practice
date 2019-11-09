@@ -2,7 +2,7 @@
 
 在根目录执行：
 ```bash
-  mynode cors
+  node ./command/CORS/server.js
 ```
 启动一个端口8888的服务
 

@@ -20,7 +20,7 @@ http.createServer((request, response) => {
     response.end(html)
   }
 
-  if (request.url === '/test.js') {
+  if (request.url === '/test') {
     // 判断是否读缓存
     const etag = request.headers['if-none-match']
     if (etag === '456') {
